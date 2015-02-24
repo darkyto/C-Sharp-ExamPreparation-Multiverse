@@ -22,8 +22,8 @@ class ShuffleCards
                               "CAD",
                               "K-A",
                               "IIA",
-                              "YLO",
-                              "PLA"  // 1
+                              "YLO", 
+                              "PLA"  // 12
                               };
 
         string input = Console.ReadLine();
@@ -31,17 +31,11 @@ class ShuffleCards
         string[] inputArray = new string[input.Length / 3]; // new array to put each "number" from the input (strings with 3 lenght)
 
 
-        for (int i = 0 ; i < input.Length; i++) //to split the "numbers"
+        for (int i = 0, j = input.Length / 3 -1 ; i < input.Length; i += 3, j--) //to split the "numbers"
         {
-            if (input.Length > 0)
-            {
-                inputArray[i] = input.Substring(input.Length - 3);
-            }
-            input = input.Substring(0, input.Length - 3);
-        }
-        if (input.Length == 3)
-        {
-            inputArray[inputArray.Length-1] = input;
+
+            inputArray[j] = input.Substring(i , 3);
+
         }
 
         long[] indexDigits = new long[inputArray.Length];
@@ -51,7 +45,7 @@ class ShuffleCards
             for (int y = 0; y < secretBase.Length; y++)
             {
                 if (inputArray[i] == secretBase[y])
-                {                   
+                {
                     indexDigits[i] = y;
                     continue;
                 }
@@ -59,7 +53,7 @@ class ShuffleCards
         }
 
         long finalDecimal = 0;
-        for (int i = 0 ; i < indexDigits.Length; i++)
+        for (int i = 0; i < indexDigits.Length; i++)
         {
             finalDecimal += indexDigits[i] * (long)Math.Pow(13, i);
         }
